@@ -304,7 +304,6 @@ void Application::Run()
 		});
 
 	glm::vec3 gravity = glm::vec3(0.0f, -5.8f, 0.0f), force = glm::vec3(0.0f, 15.0f, 0.0f), netforce = { 0.0f, 0.0f, 0.0f }, speed = { 0.0f, 0.0f, 0.0f };
-	glm::mat4 transform;
 
 	std::linear_congruential_engine<unsigned short, 1, 47, 200> rand;
 	int rot = 0;
@@ -328,7 +327,7 @@ void Application::Run()
 		if (resume)
 		{
 			netforce = gravity;
-			if (window->IsKeyPressed(Event::Key::Space))
+			if (window->IsKeyPressed(Event::Mouse::ButtonLeft))
 			{
 				netforce = force + gravity;
 				if (rot < 15)
@@ -461,7 +460,7 @@ void Application::Run()
 			timer.Reset();
 		}
 		shader->SetUniformsMat4f("u_MVP", MVP);
-		if (window->IsKeyPressed(Event::Key::Space))
+		if (window->IsKeyPressed(Event::Mouse::ButtonLeft))
 		{
 			ME::VERTEX pt1 = Rocket->GetVertices()[0], pt2 = Rocket->GetVertices()[1];
 			glm::vec3 pt((pt1.vertices[0] + pt2.vertices[0]) / 2.0f, (pt1.vertices[1] + pt2.vertices[1]) / 2.0f, 1.0f);
